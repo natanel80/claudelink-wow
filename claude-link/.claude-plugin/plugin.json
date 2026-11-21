@@ -1,6 +1,6 @@
 {
   "name": "wow-forever-link",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Lets Claude see your WoW Forever character live while you play: health, target, pet, cooldowns, fights, quests, bags, and data from Hekili, DBM, Questie, Auctionator and Pawn. Read-only.",
   "author": { "name": "natanel80" },
   "license": "MIT",

@@ -106,3 +106,24 @@ def test_old_downloads_are_cleaned_up(monkeypatch, tmp_path, fake_github):
         publish(v)
         launch.check_for_update(data)
     assert sorted(d.name for d in data.glob("app-*")) == ["app-98.0.0", "app-99.0.0"]
+
+
+def test_hands_off_to_the_newest_downloaded_launcher(monkeypatch, tmp_path, fake_github):
+    """An old install must run the downloaded launcher, so launcher changes arrive through updates."""
+    url, publish = fake_github
+    publish("99.0.0")
+    launch = load_launch(monkeypatch, url)
+    data = tmp_path / "data"
+    data.mkdir()
+    monkeypatch.setenv("CLAUDELINK_DATA", str(data))
+    monkeypatch.delenv("CLAUDELINK_HANDOFF", raising=False)
+    launch.check_for_update(data)
+    new_launcher = data / "app-99.0.0" / "server" / "launch.py"
+    marker = tmp_path / "handed-off.txt"
+    new_launcher.write_text(
+        "import os, pathlib\n"
+        f"pathlib.Path({str(marker)!r}).write_text(os.environ.get('CLAUDELINK_HANDOFF', ''))\n"
+    )
+    monkeypatch.setattr(launch, "check_for_update", lambda base: None)
+    assert launch.main() == 0
+    assert marker.read_text() == "1"
