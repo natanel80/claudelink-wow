@@ -1,0 +1,16 @@
+{
+  "name": "wow-forever-link",
+  "version": "0.4.1",
+  "description": "Lets Claude see your WoW Forever character live while you play: health, target, pet, cooldowns, fights, quests, bags, and data from Hekili, DBM, Questie, Auctionator and Pawn. Read-only.",
+  "author": { "name": "natanel80" },
+  "license": "MIT",
+  "userConfig": {
+    "wow_dir": {
+      "type": "directory",
+      "title": "WoW Forever folder",
+      "description": "The _forever_ folder inside your World of Warcraft folder.",
+      "default": "C:\\Program Files (x86)\\World of Warcraft\\_forever_",
+      "required": false
+    }
+  }
+}

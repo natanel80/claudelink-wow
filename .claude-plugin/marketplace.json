@@ -1,0 +1,12 @@
+{
+  "name": "wow-forever",
+  "description": "Tools for playing WoW Forever with Claude",
+  "owner": { "name": "natanel80" },
+  "plugins": [
+    {
+      "name": "wow-forever-link",
+      "source": "./claude-link",
+      "description": "Lets Claude see your WoW Forever character live while you play (read-only)."
+    }
+  ]
+}

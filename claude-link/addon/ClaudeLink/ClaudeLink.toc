@@ -1,0 +1,12 @@
+## Interface: 16001
+## Title: ClaudeLink
+## Notes: Shares your character's live state with Claude (read-only).
+## Version: 0.4.1
+## SavedVariables: ClaudeLinkDB
+## OptionalDeps: Questie, QuestieDB, DBM-Core, Hekili, Auctionator, Pawn, Bartender4
+
+Util.lua
+Integrations.lua
+Live.lua
+Snapshot.lua
+Commands.lua

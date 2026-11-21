@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "wow-forever": {
+      "command": "python",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/server/launch.py"],
+      "env": {
+        "WOW_DIR": "${user_config.wow_dir}",
+        "CLAUDELINK_DATA": "${CLAUDE_PLUGIN_DATA}",
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  }
+}

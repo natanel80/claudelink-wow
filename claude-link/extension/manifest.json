@@ -1,0 +1,66 @@
+{
+  "manifest_version": "0.3",
+  "name": "wow-forever-link",
+  "display_name": "WoW Forever Link (ClaudeLink)",
+  "version": "0.4.1",
+  "description": "Lets Claude see your WoW Forever character live while you play. Read-only.",
+  "long_description": "Reads the ClaudeLink addon's strip of colored squares in a corner of the game window, the addon's saved report and the game's combat log file, so Claude can see your health, target, pet, cooldowns, quests, bags and more while you play. It also installs the ClaudeLink addon into your WoW Forever folder. It never presses keys or plays for you.",
+  "author": { "name": "natanel80", "url": "https://github.com/natanel80/claudelink-wow" },
+  "repository": { "type": "git", "url": "https://github.com/natanel80/claudelink-wow" },
+  "icon": "icon.png",
+  "server": {
+    "type": "python",
+    "entry_point": "server/launch.py",
+    "mcp_config": {
+      "command": "python",
+      "args": ["${__dirname}/server/launch.py"],
+      "env": {
+        "WOW_DIR": "${user_config.wow_dir}",
+        "CLAUDELINK_AUTO_UPDATE": "${user_config.auto_update}",
+        "CLAUDELINK_GITHUB_TOKEN": "${user_config.github_token}",
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  },
+  "tools": [
+    { "name": "get_live_state", "description": "Your character right now: health, target, pet, buffs, cooldowns, fight, money, location" },
+    { "name": "get_recent_events", "description": "What just happened: combat, deaths, low health, errors, level ups" },
+    { "name": "get_health_timeline", "description": "Health and power second by second" },
+    { "name": "get_full_report", "description": "Spellbook, bags, quests, gear, talents, past fights and deaths" },
+    { "name": "get_quest_guide", "description": "Where to go for each quest (from Questie)" },
+    { "name": "get_notes", "description": "Notes kept between conversations" },
+    { "name": "save_note", "description": "Remember a plan or decision" },
+    { "name": "get_combat_log", "description": "Hit-by-hit lines from the game's combat log file" },
+    { "name": "take_screenshot", "description": "A picture of the game window" },
+    { "name": "get_link_status", "description": "Check that the link to the game works" }
+  ],
+  "user_config": {
+    "wow_dir": {
+      "type": "directory",
+      "title": "WoW Forever folder",
+      "description": "The _forever_ folder inside your World of Warcraft folder.",
+      "default": "C:\\Program Files (x86)\\World of Warcraft\\_forever_",
+      "required": true
+    },
+    "auto_update": {
+      "type": "boolean",
+      "title": "Automatic updates",
+      "description": "On each start, download the newest version from GitHub (natanel80/claudelink-wow) and update the addon in the game.",
+      "default": true,
+      "required": false
+    },
+    "github_token": {
+      "type": "string",
+      "title": "GitHub token (not needed)",
+      "description": "Leave empty. Only needed if natanel80/claudelink-wow is ever made private (a read-only token for it).",
+      "sensitive": true,
+      "required": false
+    }
+  },
+  "compatibility": {
+    "platforms": ["win32"],
+    "runtimes": { "python": ">=3.10" }
+  },
+  "keywords": ["wow", "world of warcraft", "game", "coach"],
+  "license": "MIT"
+}
