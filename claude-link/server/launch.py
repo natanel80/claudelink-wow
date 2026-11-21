@@ -3,7 +3,8 @@
 Uses only the standard library.
 
 Updates: on each start it asks GitHub (natanel80/claudelink-wow, branch main)
-which version is current. The repository may be private: then a read-only
+which version is current. The newest downloaded launcher takes over from this one,
+so updates also change this file. The repository may be private: then a read-only
 GitHub token is needed (the extension's "GitHub token" setting,
 CLAUDELINK_GITHUB_TOKEN). If that is newer than what it has, it downloads the
 server and addon code into ~/.claudelink/app-<version> and runs that copy. The
@@ -207,6 +208,15 @@ def main() -> int:
         return 1
     check_for_update(base)
     code = best_code(base)
+    # Hand off to the newest downloaded launcher, so changes to this file (for example a new
+    # repository address) also arrive through updates. The handed-off launcher doesn't hand off again.
+    newer_launcher = code / "server" / "launch.py"
+    if code != BUNDLED and newer_launcher.is_file() and not os.environ.get("CLAUDELINK_HANDOFF"):
+        os.environ["CLAUDELINK_HANDOFF"] = "1"
+        os.environ["CLAUDELINK_DATA"] = str(base)
+        log(f"Starting the launcher of version {code_version(code)}")
+        runpy.run_path(str(newer_launcher), run_name="__main__")
+        return 0
     log(f"Running version {code_version(code)} from {code}")
     try:
         lib = ensure_packages(base, code / "server" / "requirements.txt")

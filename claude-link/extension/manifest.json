@@ -2,7 +2,7 @@
   "manifest_version": "0.3",
   "name": "wow-forever-link",
   "display_name": "WoW Forever Link (ClaudeLink)",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Lets Claude see your WoW Forever character live while you play. Read-only.",
   "long_description": "Reads the ClaudeLink addon's strip of colored squares in a corner of the game window, the addon's saved report and the game's combat log file, so Claude can see your health, target, pet, cooldowns, quests, bags and more while you play. It also installs the ClaudeLink addon into your WoW Forever folder. It never presses keys or plays for you.",
   "author": { "name": "natanel80", "url": "https://github.com/natanel80/claudelink-wow" },

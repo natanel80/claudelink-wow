@@ -1,7 +1,7 @@
 -- ClaudeLink: shared helpers (safe API calls, byte writer, JSON, Base64).
 local ADDON, ns = ...
 
-ns.VERSION = "0.4.1"
+ns.VERSION = "0.4.2"
 
 local floor, select, type, tostring, tonumber = math.floor, select, type, tostring, tonumber
 local unpack = unpack or table.unpack
